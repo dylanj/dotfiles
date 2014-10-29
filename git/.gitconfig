@@ -1,0 +1,27 @@
+[user]
+	name = Dylan Johnston
+	email = qdylanj@gmail.com
+[github]
+  user = DylanJ
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+  ui = auto
+  grep = auto
+[alias]
+  l = log --oneline --decorate
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  train = log --oneline --graph
+[core]
+	excludesfile = /home/dylan/.gitignore_global
+  editor = vim
+  whitespace = trailing-space,space-before-tab
+[diff]
+  renames = copies
+  algorithm = patience
+[diff "image"]
+  textconv = identify
+[rebase]
+  autosquash = true

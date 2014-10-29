@@ -1,0 +1,12 @@
+*.swp
+*.swo
+*.DS_Store
+.gems
+.pryrc
+.env
+.ruby-*
+.bundle
+spec/*/_*
+coverage
+vendor/bundle
+public/assets

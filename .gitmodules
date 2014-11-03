@@ -98,3 +98,7 @@
   path = vim/.vim/bundle/vim-rails
   url = https://github.com/tpope/vim-rails.git
 
+[submodule "zsh/.zprezto"]
+  path = zsh/.zprezto
+  url = https://github.com/sorin-ionescu/prezto.git
+

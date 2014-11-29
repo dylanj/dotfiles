@@ -18,6 +18,10 @@ alias ssh="TERM=xterm-256color ssh"
 export GOROOT=/usr/local/go
 export GOPATH=/mnt/code/go
 
+# nodejs
+export NPM_PACKAGES="$HOME/.npm-packages"
+export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+
 # paths
 export PATH=$PATH:/opt/VirtualBox
 export PATH=$PATH:/usr/local/sbin
@@ -29,6 +33,8 @@ export PATH=$PATH:/usr/games
 export PATH=$PATH:/opt/java/bin
 export PATH=$PATH:$HOME/.bin
 export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
+export PATH="$NPM_PACKAGES/bin:$PATH"
 export FPATH=$HOME/.zfuncs/:$FPATH
 
 # cd paths
@@ -38,6 +44,8 @@ export CDPATH=$CDPATH:$GOPATH/src/github.com/aarondl
 # ruby what the fuck
 export RUBY_GC_MALLOC_LIMIT=1000000000
 export RUBYOPT="" # gentoo adds -rauto_gem for some reason...
+
+export MANPATH="$NPM_PACKAGES/share/man:$MANPATH"
 
 source /usr/share/chruby/chruby.sh
 source /usr/share/chruby/auto.sh

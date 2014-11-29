@@ -15,6 +15,7 @@ Plugin 'tpope/vim-rails'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rake'
+Plugin 'tpope/vim-commentary'
 Plugin 'fatih/vim-go'
 Plugin 'ecomba/vim-ruby-refactoring'
 Plugin 'othree/html5.vim'
@@ -30,6 +31,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'SirVer/ultisnips'
 Plugin 'Blackrush/vim-gocode', {'rtp':'vim/'}
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'rking/vim-detailed'
 
 Plugin 'bling/vim-airline'
 Plugin 'ntpeters/vim-better-whitespace'
@@ -73,8 +75,10 @@ set wildmode=longest:full,full
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
+
 let g:airline_symbols.space = "\ua0"
 let g:airline_powerline_fonts = 1
+let g:commentary_map_backslash = 1
 
 color railscasts
 

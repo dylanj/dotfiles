@@ -6,6 +6,10 @@
   path = vim/.vim/bundle/vim-ruby
   url = https://github.com/vim-ruby/vim-ruby.git
 
+[submodule "vim/.vim/bundle/vim-commentary"]
+  path = vim/.vim/bundle/vim-commentary
+  url = https://github.com/tpope/vim-commentary.git
+
 [submodule "vim/.vim/bundle/scss-syntax.vim"]
   path = vim/.vim/bundle/scss-syntax.vim
   url = https://github.com/cakebaker/scss-syntax.vim.git
@@ -37,6 +41,10 @@
 [submodule "vim/.vim/bundle/YouCompleteMe"]
   path = vim/.vim/bundle/YouCompleteMe
   url = https://github.com/Valloric/YouCompleteMe.git
+
+[submodule "vim/.vim/bundle/vim-detailed"]
+  path = vim/.vim/bundle/vim-detailed
+  url = https://github.com/rking/vim-detailed.git
 
 [submodule "vim/.vim/bundle/vim-airline"]
   path = vim/.vim/bundle/vim-airline
@@ -90,6 +98,10 @@
   path = vim/.vim/bundle/ctrlp.vim
   url = https://github.com/kien/ctrlp.vim.git
 
+[submodule "vim/.vim/bundle/syntastic"]
+  path = vim/.vim/bundle/syntastic
+  url = https://github.com/scrooloose/syntastic.git
+
 [submodule "vim/.vim/bundle/gist-vim"]
   path = vim/.vim/bundle/gist-vim
   url = https://github.com/mattn/gist-vim.git
@@ -101,4 +113,12 @@
 [submodule "zsh/.zprezto"]
   path = zsh/.zprezto
   url = https://github.com/sorin-ionescu/prezto.git
+
+[submodule "ruby/.rbenv"]
+  path = ruby/.rbenv
+  url = https://github.com/sstephenson/rbenv.git
+
+[submodule "ruby/.rbenv-plugins/ruby-build"]
+  path = ruby/.rbenv-plugins/ruby-build
+  url = https://github.com/sstephenson/ruby-build.git
 

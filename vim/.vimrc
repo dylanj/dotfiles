@@ -20,6 +20,7 @@ Plugin 'fatih/vim-go'
 Plugin 'ecomba/vim-ruby-refactoring'
 Plugin 'othree/html5.vim'
 Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'scrooloose/syntastic'
 
 Plugin 'rking/ag.vim'
 Plugin 'kien/ctrlp.vim'
@@ -107,3 +108,13 @@ nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:gist_post_private = 1
 
 set completeopt-=preview
+
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0

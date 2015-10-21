@@ -1,0 +1,12 @@
+\timing
+\set PROMPT1 '%n@%m %/%R%x%# '
+\set PROMPT2 '%n@%m %/%R%x%# '
+
+\set COMP_KEYWORD_CASE preserve_upper
+\set ON_ERROR_ROLLBACK interactive
+
+\set HISTFILE ~/.psql/history- :DBNAME
+
+\x auto
+\pset pager on
+\pset null (null)

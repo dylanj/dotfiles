@@ -21,6 +21,7 @@ Plugin 'ecomba/vim-ruby-refactoring'
 Plugin 'othree/html5.vim'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'scrooloose/syntastic'
+Plugin 'Sclarki/neonwave.vim'
 
 Plugin 'rking/ag.vim'
 Plugin 'kien/ctrlp.vim'
@@ -33,6 +34,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'Blackrush/vim-gocode', {'rtp':'vim/'}
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'rking/vim-detailed'
+Plugin 'scrooloose/nerdtree'
 
 Plugin 'bling/vim-airline'
 Plugin 'ntpeters/vim-better-whitespace'
@@ -70,7 +72,7 @@ set undofile
 set nobackup
 set noswapfile
 
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.log,*.sqlite3,public/assets/*,coverage,vendor
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.log,*.sqlite3,public/assets/*,coverage,*/vendor/bundle/*
 set wildmode=longest:full,full
 
 if !exists('g:airline_symbols')
@@ -81,7 +83,8 @@ let g:airline_symbols.space = "\ua0"
 let g:airline_powerline_fonts = 1
 let g:commentary_map_backslash = 1
 
-color railscasts
+" color railscasts
+color neonwave
 
 cmap w!! w !sudo tee % >/dev/null
 
@@ -105,16 +108,26 @@ let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_autoclose_preview_window_after_completion=1
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
+
+" clear whitespace
+nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+
 let g:gist_post_private = 1
 
 set completeopt-=preview
-
-
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+
+set colorcolumn=80
+highlight ColorColumn ctermbg=darkgrey
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_eruby_ruby_quiet_messages = {'regex': 'possibly useless use of a variable in void context'}
+
+let g:ctrlp_working_path_mode = 'ra'
+let g:rspec_command = "!bundle exec rspec {spec}"

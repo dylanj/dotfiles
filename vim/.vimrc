@@ -22,6 +22,7 @@ Plugin 'othree/html5.vim'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'Sclarki/neonwave.vim'
+Plugin 'vim-scripts/AnsiEsc.vim'
 
 Plugin 'rking/ag.vim'
 Plugin 'kien/ctrlp.vim'
@@ -107,6 +108,7 @@ let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_autoclose_preview_window_after_completion=1
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>e :AnsiEsc<CR>
 
 
 " clear whitespace
@@ -131,3 +133,11 @@ let g:syntastic_eruby_ruby_quiet_messages = {'regex': 'possibly useless use of a
 
 let g:ctrlp_working_path_mode = 'ra'
 let g:rspec_command = "!bundle exec rspec {spec}"
+
+let g:go_fmt_command = "goimports"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+

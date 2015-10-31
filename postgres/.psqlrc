@@ -2,7 +2,7 @@
 \set PROMPT1 '%n@%m %/%R%x%# '
 \set PROMPT2 '%n@%m %/%R%x%# '
 
-\set COMP_KEYWORD_CASE preserve_upper
+\set COMP_KEYWORD_CASE preserve-upper
 \set ON_ERROR_ROLLBACK interactive
 
 \set HISTFILE ~/.psql/history- :DBNAME

@@ -6,10 +6,18 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'L9'
 
-Plugin 'int3/vim-extradite'
+Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-fugitive'
-Plugin 'mattn/gist-vim'
+Plugin 'int3/vim-extradite'
+let g:extradite_showhash=1
 
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+endif
+
+Plugin 'dyng/ctrlsf.vim'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'tpope/vim-rails'
 Plugin 'kchmck/vim-coffee-script'
@@ -24,7 +32,6 @@ Plugin 'scrooloose/syntastic'
 Plugin 'Sclarki/neonwave.vim'
 Plugin 'vim-scripts/AnsiEsc.vim'
 
-Plugin 'rking/ag.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'sjl/gundo.vim'
 
@@ -80,12 +87,13 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
-let g:airline_symbols.space = "\ua0"
+" let g:airline_symbols.space = "\ua0"
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tagbar#enabled = 0
 let g:commentary_map_backslash = 1
+let g:airline_theme='powerlineish'
 
 " color railscasts
-color neonwave
 
 cmap w!! w !sudo tee % >/dev/null
 
@@ -108,10 +116,12 @@ let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_autoclose_preview_window_after_completion=1
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" Parse ANSI escape codes.
 nnoremap <leader>e :AnsiEsc<CR>
-
-
-" clear whitespace
+" Open CtrlSF
+nmap     <C-F>f <Plug>CtrlSFPrompt
+" Clear whitespace
 nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 
 let g:gist_post_private = 1
@@ -119,6 +129,7 @@ let g:gist_post_private = 1
 set completeopt-=preview
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%{fugitive#statusline()}
 set statusline+=%*
 
 set colorcolumn=80
@@ -141,3 +152,11 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
+color neonwave
+
+highlight link SyntasticError SpellBad
+highlight link SyntasticWarning SpellCap
+
+set textwidth=80
+vmap Q gq
+nmap Q gqap

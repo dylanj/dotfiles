@@ -1,3 +1,8 @@
+bindkey -e
+
+bindkey -M emacs '^[[1;5C' forward-word
+bindkey -M emacs '^[[1;5D' backward-word
+
 # Source Prezto.
 source "/home/dylan/.zprezto/init.zsh"
 
@@ -11,7 +16,6 @@ alias gt="ginkgo watch -r | colortest"
 alias ls="ls --color"
 alias rs="bundle exec rails s"
 alias rc="bundle exec rails c"
-unalias rm
 alias ssh="TERM=xterm-256color ssh"
 
 # golang
@@ -49,7 +53,10 @@ export CDPATH=$CDPATH:$GOPATH/src/github.com/aarondl
 # ruby what the fuck
 export RUBY_GC_MALLOC_LIMIT=1000000000
 export RUBYOPT="" # gentoo adds -rauto_gem for some reason...
+export HISTFILE=$HOME/.zsh_history
 
+export HISTSIZE=5000
+export SAVEHIST=$HISTSIZE
 export MANPATH="$NPM_PACKAGES/share/man:$MANPATH"
 
 # LS color hax.
@@ -68,3 +75,12 @@ alias resettest="dropdb shore-rss-test && createdb shore-rss-test && RACK_ENV=te
 
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
+
+# bindkey -e
+
+# bindkey -M emacs '^[[1;5C' forward-word
+# bindkey -M emacs '^[[1;5D' backward-word
+#
+# bindkey '^[[1;5D' backward-word
+# bindkey '^[[1;5C' forward-word
+

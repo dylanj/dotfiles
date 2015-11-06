@@ -23,11 +23,14 @@ zstyle ':prezto:load' pmodule \
   'completion' \
   'prompt'
 
-zstyle ':prezto:module:editor' key-bindings 'emacs'
 zstyle ':prezto:module:editor' dot-expansion 'yes'
+zstyle ':prezto:load' pmodule 'git'
+
+zstyle ':prezto:module:syntax-highlighting' highlighters 'main' 'brackets' 'pattern' 'root'
 
 # Ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'.
 zstyle ':prezto:module:git:status:ignore' submodules 'all'
+zstyle ':prezto:module:editor' key-bindings 'emacs'
 
 # Set the command prefix on non-GNU systems.
 # zstyle ':prezto:module:gnu-utility' prefix 'g'
@@ -85,3 +88,5 @@ zstyle ':prezto:module:ruby:chruby' auto-switch 'yes'
 # Set the tab title format.
 # zstyle ':prezto:module:terminal:tab-title' format '%m: %s'
 #
+zstyle ':prezto:module:editor' key-bindings 'emacs'
+zstyle ':prezto:load' pmodule 'syntax-highlighting'

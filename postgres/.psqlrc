@@ -25,7 +25,7 @@
 
 \set tablesize 'SELECT nspname || \'.\' || relname AS \"relation\", pg_size_pretty(pg_relation_size(C.oid)) AS "size" FROM pg_class C LEFT JOIN pg_namespace N ON (N.oid = C.relnamespace) WHERE nspname NOT IN (\'pg_catalog\', \'information_schema\') ORDER BY pg_relation_size(C.oid) DESC LIMIT 40;'
 
-\set uselesscol 'SELECT nspname, relname, attname, typname, (stanullfrac*100)::int AS null_percent, case when stadistinct &gt;= 0 then stadistinct else abs(stadistinct)*reltuples end AS \"distinct\", case 1 when stakind1 then stavalues1 when stakind2 then stavalues2 end AS \"values\" FROM pg_class c JOIN pg_namespace ns ON (ns.oid=relnamespace) JOIN pg_attribute ON (c.oid=attrelid) JOIN pg_type t ON (t.oid=atttypid) JOIN pg_statistic ON (c.oid=starelid AND staattnum=attnum) WHERE nspname NOT LIKE E\'pg\\\\_%\' AND nspname != \'information_schema\' AND relkind=\'r\' AND NOT attisdropped AND attstattarget != 0 AND reltuples &gt;= 100 AND stadistinct BETWEEN 0 AND 1 ORDER BY nspname, relname, attname;'
+\set uselesscol 'SELECT nspname, relname, attname, typname, (stanullfrac*100)::int AS null_percent, case when stadistinct >= 0 then stadistinct else abs(stadistinct)*reltuples end AS \"distinct\", case 1 when stakind1 then stavalues1 when stakind2 then stavalues2 end AS \"values\" FROM pg_class c JOIN pg_namespace ns ON (ns.oid=relnamespace) JOIN pg_attribute ON (c.oid=attrelid) JOIN pg_type t ON (t.oid=atttypid) JOIN pg_statistic ON (c.oid=starelid AND staattnum=attnum) WHERE nspname NOT LIKE E\'pg\\\\_%\' AND nspname != \'information_schema\' AND relkind=\'r\' AND NOT attisdropped AND attstattarget != 0 AND reltuples >= 100 AND stadistinct BETWEEN 0 AND 1 ORDER BY nspname, relname, attname;'
 
 \set uptime 'select now() - pg_postmaster_start_time() AS uptime;'
 
@@ -45,7 +45,7 @@
 
 \set outliers 'SELECT query, time, calls, hits FROM ( SELECT query, (total_time/calls) AS time, calls, AVG(calls) OVER () AS avg_calls, AVG(total_time/calls) OVER () AS avg_time, 100.0 * shared_blks_hit / nullif(shared_blks_hit + shared_blks_read, 0) AS hits FROM pg_stat_statements WHERE userid = (SELECT usesysid FROM pg_user WHERE usename = current_user LIMIT 1)) AS ss WHERE calls > avg_calls AND time > avg_time ORDER BY hits ASC, calls DESC, avg_time ASC;'
 
-\set rss_overview 'select ( select count(*) from occurrences ) as o_cnt, ( select count(*) from series ) as s_cnt, (select count(*) from publications) as p_cnt;'
+\set rss_overview 'select ( select count(*) from occurrences ) as o_cnt, (select count(*) from rules) as r_cnd, ( select count(*) from series ) as s_cnt, (select count(*) from publications) as p_cnt;'
 \set core_overview 'select ( select count(*) from appointment_occurrences ) as o_cnt, ( select count(*) filter (where(deleted_at is null)) from appointment_series) as s_cnt, ( select count(*) filter (where(deleted_at is not null)) from appointment_series) as s_cnt, (select count(*) from booked_events) as be_cnt;'
 \set clear_rss 'truncate series cascade; truncate publications;'
 \set clear_core 'truncate appointment_series cascade; truncate booked_events;'

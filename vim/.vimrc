@@ -1,149 +1,48 @@
-set rtp+=$GOROOT/misc/vim
-set rtp+=~/.vim/bundle/Vundle.vim
+set shell=/bin/bash " I use fish, and vim doesn't like it.
+set textwidth=80 " Ideally columns should be <= 80 len
+set nocompatible " Vi sucks.
+set laststatus=2 " Always show status bar.
+set hlsearch " Highlight searches
+set incsearch " Start searching as you type
+set ignorecase " Case insensitive searches by default
+set smartcase " But allow case sensitive if caps are used
+set ttyfast " Let VIM know it can send lots of data to the terminal
+set number " Line numbering
+set noerrorbells " Disable terminal bells/beeps on error
+set t_Co=256 " 256 Color Terminal
+set wildmenu " A menu for command completion
 
+" Vundle
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'gmarik/Vundle.vim'
-Plugin 'L9'
+Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'tpope/vim-sensible'
-Plugin 'tpope/vim-fugitive'
-Plugin 'int3/vim-extradite'
-let g:extradite_showhash=1
+" NGINX Support
+Plugin 'nginx.vim'
 
-" The Silver Searcher
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-endif
+au BufRead,BufNewFile /etc/nginx/*,/usr/local/nginx/conf/*,nginx.conf if &ft == '' | setfiletype nginx | endif
 
-Plugin 'dyng/ctrlsf.vim'
+" RUBY Support
 Plugin 'thoughtbot/vim-rspec'
-Plugin 'tpope/vim-rails'
-Plugin 'kchmck/vim-coffee-script'
 Plugin 'vim-ruby/vim-ruby'
-Plugin 'tpope/vim-rake'
-Plugin 'tpope/vim-commentary'
-Plugin 'fatih/vim-go'
-Plugin 'ecomba/vim-ruby-refactoring'
-Plugin 'othree/html5.vim'
-Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'Sclarki/neonwave.vim'
-Plugin 'vim-scripts/AnsiEsc.vim'
 
-Plugin 'kien/ctrlp.vim'
-Plugin 'sjl/gundo.vim'
-
-Plugin 'dgryski/vim-godef'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-repeat'
-Plugin 'SirVer/ultisnips'
-Plugin 'Blackrush/vim-gocode', {'rtp':'vim/'}
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'rking/vim-detailed'
-Plugin 'scrooloose/nerdtree'
-
-Plugin 'bling/vim-airline'
-Plugin 'ntpeters/vim-better-whitespace'
-
-call vundle#end()            " required
-filetype plugin indent on    " required
-
-syntax enable
-set hlsearch
-set incsearch
-set ignorecase
-set smartcase
-
-set nocp
-set background=dark
-set t_Co=256
-set nu
-set backspace=indent,eol,start
-set autoread
-set ttyfast
-set noerrorbells
-set novisualbell
-set laststatus=2
-
-"set autoindent
-set expandtab
-set shiftwidth=2
-set tabstop=2
-set nocompatible
-
-set shell=zsh
-
-set undodir=~/.vim/backups
-set undofile
-set nobackup
-set noswapfile
-
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.log,*.sqlite3,public/assets/*,coverage,*/vendor/bundle/*
-set wildmode=longest:full,full
-
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-
-" let g:airline_symbols.space = "\ua0"
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tagbar#enabled = 0
-let g:commentary_map_backslash = 1
-let g:airline_theme='powerlineish'
-
-" color railscasts
-
-cmap w!! w !sudo tee % >/dev/null
-
-let mapleader=" "
-nmap <Leader>u :GundoToggle<CR>
-nmap <Leader>n :NERDTreeToggle<CR>
-nmap <Leader>t :call RunCurrentSpecFile()<CR>
-nmap <Leader>s :call RunNearestSpec()<CR>
-nmap <Leader>a :call RunAllSpecs()<CR>
-
-" ultisnips
-let g:UltiSnipsEditSplit = 'vertical'
-let g:UltiSnipsExpandTrigger = '<tab>'
-let g:UltiSnipsListSnippets = '<c-tab>'
-let g:UltiSnipsJumpForwardTrigger = '<tab>'
-let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
-
-" ycm
-let g:ycm_key_list_select_completion = ['<Down>']
-let g:ycm_key_list_previous_completion = ['<Up>']
-let g:ycm_autoclose_preview_window_after_completion=1
-nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
-" Parse ANSI escape codes.
-nnoremap <leader>e :AnsiEsc<CR>
-" Open CtrlSF
-nmap     <C-F>f <Plug>CtrlSFPrompt
-" Clear whitespace
-nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
-
-let g:gist_post_private = 1
-
-set completeopt-=preview
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%{fugitive#statusline()}
-set statusline+=%*
-
-set colorcolumn=80
-highlight ColorColumn ctermbg=darkgrey
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_eruby_ruby_quiet_messages = {'regex': 'possibly useless use of a variable in void context'}
-
-let g:ctrlp_working_path_mode = 'ra'
 let g:rspec_command = "!bundle exec rspec {spec}"
+
+" Markdown
+Plugin 'hallison/vim-markdown'
+
+" HTML5, CSS3, JS
+Plugin 'pangloss/vim-javascript'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'othree/html5.vim'
+Plugin 'hail2u/vim-css3-syntax'
+
+" Go
+Plugin 'fatih/vim-go'
+Plugin 'Blackrush/vim-gocode', {'rtp':'vim/'}
+Plugin 'dgryski/vim-godef'
 
 let g:go_fmt_command = "goimports"
 let g:go_highlight_functions = 1
@@ -152,11 +51,71 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
-color neonwave
+" Autocomplete
+Plugin 'Valloric/YouCompleteMe'
 
+nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_key_list_select_completion = ['<Down>']
+let g:ycm_key_list_previous_completion = ['<Up>']
+let g:ycm_autoclose_preview_window_after_completion=1
+
+" Disable YCM for Ruby.
+let g:ycm_filetype_blacklist = { 'rb' : 1, 'ruby': 1, 'erb': 1 }
+
+" Fish Shell
+Plugin 'dag/vim-fish'
+
+" Syntax Highlighting
+Plugin 'scrooloose/syntastic'
+
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_javascript_checkers = ['jshint']
+
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_eruby_ruby_quiet_messages = {'regex': 'possibly useless use of a variable in void context'}
+
+" Theme
 highlight link SyntasticError SpellBad
 highlight link SyntasticWarning SpellCap
+color neonwave
 
-set textwidth=80
-vmap Q gq
-nmap Q gqap
+" Status Bar
+Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+let g:airline_theme = 'luna' " or paper
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_powerline_fonts = 0
+
+" Easy Comments with Tab
+Plugin 'tpope/vim-commentary'
+
+xmap \\  <Plug>Commentary
+nmap \\  <CR><Plug>Commentary
+nmap \\\ <Plug>CommentaryLine
+nmap \\u <Plug>CommentaryUndo
+
+" Git
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+
+" Trailing Whitespace
+Plugin 'ntpeters/vim-better-whitespace'
+
+" History
+set undodir=~/.vim/backups
+set undofile
+set nobackup
+set noswapfile
+
+call vundle#end()
+
+filetype plugin indent on
+syntax on

@@ -12,6 +12,22 @@ set noerrorbells " Disable terminal bells/beeps on error
 set t_Co=256 " 256 Color Terminal
 set wildmenu " A menu for command completion
 
+" Formatting
+set tabstop=2 " Tabs are two spaces.
+set shiftwidth=2 " This should be the same as tabstop but i dont know why
+set expandtab " spaces > tabs
+
+" Highlight the 81st column so I know when my lines are too long.
+highlight ColorColumn ctermbg=yellow
+call matchadd('ColorColumn', '\%81v', 100)
+
+" Wraps a selection to the column size
+vmap Q gq
+nmap Q gqap
+
+" Options
+let mapleader=" "
+
 " Vundle
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -22,13 +38,18 @@ Plugin 'VundleVim/Vundle.vim'
 " NGINX Support
 Plugin 'nginx.vim'
 
-au BufRead,BufNewFile /etc/nginx/*,/usr/local/nginx/conf/*,nginx.conf if &ft == '' | setfiletype nginx | endif
+au BufRead,BufNewFile
+ \ /etc/nginx/*,/usr/local/nginx/conf/*,nginx.conf
+ \ if &ft == '' | setfiletype nginx | endif
 
 " RUBY Support
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'vim-ruby/vim-ruby'
 
 let g:rspec_command = "!bundle exec rspec {spec}"
+nmap <Leader>t :call RunCurrentSpecFile()<CR>
+nmap <Leader>s :call RunNearestSpec()<CR>
+nmap <Leader>a :call RunAllSpecs()<CR>
 
 " Markdown
 Plugin 'hallison/vim-markdown'
@@ -50,6 +71,46 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+
+" Code Exploration
+Plugin 'majutsushi/tagbar'
+nmap <Leader>a :TagbarToggle<CR>
+
+  let g:tagbar_type_go = {  
+      \ 'ctagstype' : 'go',
+      \ 'kinds'     : [
+          \ 'p:package',
+          \ 'i:imports:1',
+          \ 'c:constants',
+          \ 'v:variables',
+          \ 't:types',
+          \ 'n:interfaces',
+          \ 'w:fields',
+          \ 'e:embedded',
+          \ 'm:methods',
+          \ 'r:constructor',
+          \ 'f:functions'
+      \ ],
+      \ 'sro' : '.',
+      \ 'kind2scope' : {
+          \ 't' : 'ctype',
+          \ 'n' : 'ntype'
+      \ },
+      \ 'scope2kind' : {
+          \ 'ctype' : 't',
+          \ 'ntype' : 'n'
+      \ },
+      \ 'ctagsbin'  : 'gotags',
+      \ 'ctagsargs' : '-sort -silent'
+    \ }
+
+" Search
+Plugin 'mileszs/ack.vim'
+let g:ackprg = 'ag --vimgrep --smart-case'
+cnoreabbrev ag Ack
+cnoreabbrev aG Ack
+cnoreabbrev Ag Ack
+cnoreabbrev AG Ack
 
 " Autocomplete
 Plugin 'Valloric/YouCompleteMe'
@@ -105,6 +166,7 @@ nmap \\u <Plug>CommentaryUndo
 " Git
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'gregsexton/gitv'
 
 " Trailing Whitespace
 Plugin 'ntpeters/vim-better-whitespace'

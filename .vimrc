@@ -40,6 +40,10 @@ call matchadd('ColorColumn', '\%81v', 100)
 au BufRead,BufNewFile *.md.erb set ft=eruby.markdown
 let g:rspec_command = "!bundle exec rspec {spec}"
 nmap <leader>t :echoerr "No build script for this buffer"<cr>
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
 
 " js
 let g:jsx_ext_required = 0
